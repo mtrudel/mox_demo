@@ -48,6 +48,10 @@ defmodule MoxDemoTest do
       {:ok, -34}
     end)
 
+    expect(MoxDemo.MockWeatherAPI, :humidity, fn _ ->
+      {:ok, 100}
+    end)
+
     assert MoxDemo.display_temp({0, 0}) == "Current temperature is -34°"
     # Your job is to make the following assertion pass
     assert MoxDemo.display_humidity({0, 0}) == "Current humidity is 100%"
@@ -76,10 +80,8 @@ defmodule MoxDemoTest do
   #    to see how to get Mox to allow a mock to be called multiple times.
   #
 
-  # IMPORTANT! Remove / comment out the following `@tag :skip` line to start running this test
-  @tag :skip
   test "TEST 2: Making your mocks callable multiple times" do
-    expect(MoxDemo.MockWeatherAPI, :temp, fn _ ->
+    expect(MoxDemo.MockWeatherAPI, :temp, 2, fn _ ->
       {:ok, -34}
     end)
 
@@ -116,9 +118,11 @@ defmodule MoxDemoTest do
   #    number of times it gets called
   #
 
-  # IMPORTANT! Remove / comment out the following `@tag :skip` line to start running this test
-  @tag :skip
   test "TEST 3: Making your mocks callable multiple times using stubs" do
+    stub(MoxDemo.MockWeatherAPI, :temp, fn _ ->
+      {:ok, -34}
+    end)
+
     assert MoxDemo.display_temp_in_toronto_and_san_francisco() ==
              "Current temperature in Toronto is -34°; while it is -34° in San Francisco"
   end
@@ -143,11 +147,13 @@ defmodule MoxDemoTest do
   #    range should have a temperature of 15°.
   #
 
-  # IMPORTANT! Remove / comment out the following `@tag :skip` line to start running this test
-  @tag :skip
   test "TEST 4: Making your mocks handle input parameters" do
-    expect(MoxDemo.MockWeatherAPI, :temp, 2, fn {_lat, _long} ->
-      {:ok, 20}
+    expect(MoxDemo.MockWeatherAPI, :temp, 2, fn {lat, _long} ->
+      if lat >= -40 && lat <= 40 do
+        {:ok, 20}
+      else
+        {:ok, 15}
+      end
     end)
 
     assert MoxDemo.display_temp_in_toronto_and_san_francisco() ==
