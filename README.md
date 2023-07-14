@@ -1,21 +1,22 @@
 # MoxDemo
 
-**TODO: Add description**
+This project serves as a demo / tutorial for the
+[Mox](https://hexdocs.pm/mox/Mox.html) library. It is structured as
+a set of failing tests which you can work through to learn about Mox's
+features in a progressive manner.
 
-## Installation
+## Running The Demo
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `mox_demo` to your list of dependencies in `mix.exs`:
+Since this demo is structured as a set of tests, running it is as easy as
+running any suite of ex_unit tests:
 
 ```elixir
-def deps do
-  [
-    {:mox_demo, "~> 0.1.0"}
-  ]
-end
+git clone git@github.com/mtrudel/mox_demo
+cd mox_demo
+mix deps.get
+mix test
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/mox_demo>.
-
+At this point you should see a single failing test (`TEST 1: Mocking Simple Functions`). Open up
+`test/mox_demo_test.exs` in your editor and follow along to the instructions
+therein. Once you make your way to the end of that file, you're done!
