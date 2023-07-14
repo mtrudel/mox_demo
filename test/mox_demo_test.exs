@@ -23,4 +23,33 @@ defmodule MoxDemoTest do
 
   use ExUnit.Case
   import Mox
+
+  #
+  # TEST 1: Mocking Simple Functions
+  #
+  # This test shows you how to mock simple functions with simple responses. 
+  #
+  # This test is currently failing since we don't have mocks defined for all of the functions
+  # that `display_humidity/1` needs to do its job.
+  #
+  # To make this test pass, take a look at the implementation of `MoxDemo.display_humidity/1` and
+  # determine which functions you might need to add to the `MoxDemo.MockWeatherAPI` mock, and then
+  # add them.
+  #
+  # HINTS:
+  #
+  # 1. You'll need to add an expectation to the MockWeatherAPI mock to support calling the
+  # `humidity/1` function. It should return a humidity of 100% (ie: `{:ok, 100}`)
+  # 2. We already have a mock defined for temp; humidity should look very similar to this
+  #
+
+  test "TEST 1: Mocking Simple Functions" do
+    expect(MoxDemo.MockWeatherAPI, :temp, fn _ ->
+      {:ok, -34}
+    end)
+
+    assert MoxDemo.display_temp({0, 0}) == "Current temperature is -34°"
+    # Your job is to make the following assertion pass
+    assert MoxDemo.display_humidity({0, 0}) == "Current humidity is 100%"
+  end
 end
