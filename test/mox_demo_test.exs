@@ -18,7 +18,12 @@ defmodule MoxDemoTest do
   # Each test has an overview and some hints to help you on your way. Consult the [Mox
   # docs](https://hexdocs.pm/mox/Mox.html) for details about how to use Mox.
   #
-  # Good luck!
+  # THERE ARE NO WRONG ANSWERS! The whole point of this exercise is to get you familiar
+  # with the Mox library, so whatever path you choose to take on that journey is fine! Good 
+  # luck!
+  # 
+  # If you get stuck, or want to jump right to the end, the `shortcuts` branch of this repo
+  # contains passing versions of these tests.
   #
 
   use ExUnit.Case
@@ -48,7 +53,10 @@ defmodule MoxDemoTest do
       {:ok, -34}
     end)
 
+    # This assertion already passes, so as to demonstrate what a complete mock setup looks like
+    # for the `temp/1` function
     assert MoxDemo.display_temp({0, 0}) == "Current temperature is -34°"
+
     # Your job is to make the following assertion pass
     assert MoxDemo.display_humidity({0, 0}) == "Current humidity is 100%"
   end
@@ -60,7 +68,7 @@ defmodule MoxDemoTest do
   # 
   # By default, mocks are *validating*, which means that they validate that they get called during
   # your test. Mox will ensure that each mock is called the expected number of times (1 by
-  # default) witnin each test, and will fail the test if this is not the case (In the next test
+  # default) within each test, and will fail the test if this is not the case (In the next test
   # we'll see a variation of mocks called 'stubs' which solve this problem in a different way).
   #
   # This test is currently failing since our `display_temp_in_toronto_and_san_francisco/0`
@@ -139,8 +147,8 @@ defmodule MoxDemoTest do
   # HINTS:
   #
   # 1. We're taking a simplistic view of weather; any location with a latitude between -40 and +40
-  #    degrees of latitude should have a temperature of 20°, and any point north / south of that
-  #    range should have a temperature of 15°.
+  #    degrees of latitude should have a temperature of 20°, and any point further away than 40
+  #    degrees from the equator should have a temperature of 15°.
   #
 
   # IMPORTANT! Remove / comment out the following `@tag :skip` line to start running this test
